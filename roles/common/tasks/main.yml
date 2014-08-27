@@ -1,0 +1,24 @@
+---
+- name: ensure the configured user exists
+  sudo: true
+  sudo_user: root
+  user: >
+    name={{ common.user }}
+    state=present
+    shell=/bin/bash
+    groups=sudo
+    append=yes
+
+- name: install dependencies
+  sudo: true
+  sudo_user: root
+  apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - git
+    - python-dev
+    - python-pip
+
+- name: upgrade setuptools
+  sudo: true
+  sudo_user: root
+  pip: name=setuptools state=latest

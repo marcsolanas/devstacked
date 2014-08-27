@@ -1,0 +1,57 @@
+---
+
+- stat: path={{ devstack.working_dir }}/unstack.sh
+  register: unstack_script
+
+- name: unstack an existing devstack
+  sudo: true
+  sudo_user: "{{ common.user }}"
+  command: ./unstack.sh --all chdir={{ devstack.working_dir }}
+  when: unstack_script.stat.exists == True
+
+- stat: path={{ devstack.working_dir }}/clean.sh
+  register: clean_script
+
+- name: clean an existing devstack
+  sudo: true
+  sudo_user: "{{ common.user }}"
+  command: ./clean.sh chdir={{ devstack.working_dir }}
+  when: clean_script.stat.exists == True
+
+- stat: path={{ devstack.working_dir }}
+  register: working_path
+
+- name: remove an existing working directory
+  sudo: yes
+  shell: rm -rf {{ devstack.working_dir }}
+  when: working_path.stat.isdir is defined and working_path.stat.isdir == True
+
+- stat: path={{ devstack.install_dir }}
+  register: install_path
+
+- name: remove an existing install directory
+  sudo: yes
+  shell: rm -rf {{ devstack.install_dir }}
+  when: install_path.stat.isdir is defined and install_path.stat.isdir == True
+
+- name: clone the devstack repo
+  sudo: true
+  sudo_user: "{{ common.user }}"
+  git: >
+    repo={{ devstack.repo }}
+    dest={{ devstack.working_dir }}
+    version={{ devstack.version }}
+
+- name: configure devstack
+  sudo: true
+  sudo_user: "{{ common.user }}"
+  template: >
+    src=local.conf.j2
+    dest={{ devstack.working_dir }}/local.conf
+    owner={{ common.user }}
+    group={{ common.user }}
+
+- name: install devstack
+  sudo: true
+  sudo_user: "{{ common.user }}"
+  command: ./stack.sh chdir={{ devstack.working_dir }}

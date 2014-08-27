@@ -1,0 +1,9 @@
+---
+# file: devstacked-playbook.yml
+# Playbook to deploy and configure the Vagrant DevStack environment
+
+- name: devstack tasks
+  hosts: devstack
+
+  roles:
+    - devstack

@@ -1,0 +1,8 @@
+---
+# file: devstacked-hosts.yml
+# VM config file for the Vagrant DevStack environment
+
+hosts:
+    devstack:
+      private_ip: 192.168.57.20
+      memory: 4096
