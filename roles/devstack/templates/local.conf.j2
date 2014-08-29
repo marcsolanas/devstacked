@@ -62,7 +62,6 @@ enable_service q-meta
 enable_service q-metering
 
 Q_PLUGIN=openvswitch
-
 OVS_ENABLE_TUNNELING=False
 
 # Bug https://bugs.launchpad.net/neutron/+bug/1112912
@@ -77,13 +76,15 @@ LIBVIRT_FIREWALL_DRIVER=nova.virt.firewall.NoopFirewallDriver
 # --------------------
 # Repository Overrides
 # --------------------
-{% for override in repository_overrides %}
-    {% if override.name is defined %}
-        {% if override.repo is defined %}
-            {{ override.name|upper }}_REPO={{ override.repo }}
+{% if repository_overrides is defined %}
+    {% for override in repository_overrides %}
+        {% if override.name is defined %}
+            {% if override.repo is defined %}
+                {{ override.name|upper }}_REPO={{ override.repo }}
+            {% endif %}
+            {% if override.branch is defined %}
+                {{ override.name|upper }}_BRANCH={{ override.branch }}
+            {% endif %}
         {% endif %}
-        {% if override.branch is defined %}
-            {{ override.name|upper }}_BRANCH={{ override.branch }}
-        {% endif %}
-    {% endif %}
-{% endfor %}
+    {% endfor %}
+{% endif %}
