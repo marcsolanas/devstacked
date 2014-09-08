@@ -1,21 +1,8 @@
 ---
-devstack:
-  repo: https://github.com/openstack-dev/devstack.git
-  version: stable/havana
-  working_dir: ~{{ common.user }}/devstack
-  install_dir: /opt/stack
-
-repository_overrides:
-#  - { name: "neutron", repo: "https://github.com/CiscoSystems/neutron.git", branch: "cis-havana" }
-  - { name: "neutron", repo: "file:////repos/neutron", branch: "DE718" }
-
-#  workspace_dir: {{ devstack.home_dir }}/workspace
-#  scripts_dir: {{ devstack.workspace_dir }}/scripts
-#  log_dir: {{ devstack.workspace_dir }}/logs
-#
-#  download_dir: {{ devstack.workspace_dir }}/devstack
-#  install_dir: /opt/stack
-#  tempest_dir: /opt/stack/tempest
-#  local_files_dir: files
-#  local_template_dir: templates
-#  test_result_dir: /var/www/results/
+devstack_clean: false
+devstack_offline: false
+devstack_reclone: false
+devstack_repo: https://github.com/openstack-dev/devstack.git
+devstack_version: stable/icehouse
+devstack_working_dir: ~{{ devstack_user }}/devstack
+devstack_install_dir: /opt/stack

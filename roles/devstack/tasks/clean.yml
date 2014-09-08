@@ -1,0 +1,33 @@
+---
+- name: unstack an existing devstack with --all
+  sudo: true
+  sudo_user: "{{ devstack_user }}"
+  command: ./unstack.sh --all chdir={{ devstack_working_dir }}
+  when: unstack_script.stat.exists == true and devstack_clean == false
+
+- stat: path={{ devstack_working_dir }}/clean.sh
+  register: clean_script
+
+- name: clean an existing devstack
+  sudo: true
+  sudo_user: "{{ devstack_user }}"
+  command: ./clean.sh chdir={{ devstack_working_dir }}
+  when: clean_script.stat.exists == true
+
+- stat: path={{ devstack_working_dir }}
+  register: working_path
+
+- name: remove an existing working directory
+  sudo: true
+  sudo_user: "{{ devstack_user }}"
+  command: rm -rf {{ devstack_working_dir }}
+  when: working_path.stat.isdir is defined and working_path.stat.isdir == true
+
+- stat: path={{ devstack_install_dir }}
+  register: install_path
+
+- name: remove an existing install directory
+  sudo: true
+  sudo_user: "{{ devstack_user }}"
+  command: rm -rf {{ devstack_install_dir }}
+  when: install_path.stat.isdir is defined and install_path.stat.isdir == true

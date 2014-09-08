@@ -4,6 +4,8 @@
 
 - name: devstack tasks
   hosts: devstack
+  vars_files:
+    - vars/local.yml
 
   roles:
     - devstack

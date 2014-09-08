@@ -1,4 +1,3 @@
 ---
-common:
-  user: vagrant
-  interface: eth1
+devstack_user: vagrant
+devstack_interface: eth0
