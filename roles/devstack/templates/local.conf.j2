@@ -51,8 +51,8 @@ VERBOSE=true
     enable_service q-meta
     enable_service neutron
 
-    Q_PLUGIN=openvswitch
-    OVS_ENABLE_TUNNELING=talse
+{#    Q_PLUGIN=openvswitch#}
+{#    OVS_ENABLE_TUNNELING=talse#}
 {%  endif %}
 
 {% if enable_tempest is defined and enable_tempest %}

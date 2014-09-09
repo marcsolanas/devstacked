@@ -6,3 +6,5 @@ devstack_repo: https://github.com/openstack-dev/devstack.git
 devstack_version: stable/icehouse
 devstack_working_dir: ~{{ devstack_user }}/devstack
 devstack_install_dir: /opt/stack
+
+enable_neutron: true
