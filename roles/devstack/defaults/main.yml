@@ -1,6 +1,6 @@
 ---
 devstack_clean: false
-devstack_offline: false
+devstack_offline: true
 devstack_reclone: false
 devstack_repo: https://github.com/openstack-dev/devstack.git
 devstack_version: stable/icehouse

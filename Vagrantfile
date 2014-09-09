@@ -19,7 +19,7 @@ Vagrant.configure('2') do |config|
             host.vm.box = 'devstacked-ubuntu-14.04'
             host.vm.box_url = './packer/builds/virtualbox/devstacked-ubuntu-14.04.box'
             host.vm.provider 'vmware_fusion' do |v, override|
-                override.vm.box_url = './packer/builds/virtualbox/devstacked-ubuntu-14.04.box'
+                override.vm.box_url = './packer/builds/vmware/devstacked-ubuntu-14.04.box'
             end
 
             host.vm.synced_folder './', '/vagrant', :disabled => true
