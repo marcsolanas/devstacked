@@ -8,17 +8,16 @@ RECLONE={{ devstack_reclone }}
 OFFLINE={{ devstack_offline }}
 
 HOST_IP={{ hostvars['devstack']['ansible_' + devstack_interface]['ipv4']['address'] }}
-{#HOST_IP=127.0.0.1#}
 HOST_IP_IFACE={{ devstack_interface }}
 SERVICE_HOST=$HOST_IP
 
 # Public Subnet
-FLOATING_RANGE=10.0.0.0/24
-PUBLIC_NETWORK_GATEWAY=10.0.0.2
+FLOATING_RANGE=10.10.0.0/24
+PUBLIC_NETWORK_GATEWAY=10.10.0.1
 
 # Private Subnet
-FIXED_RANGE=10.0.1.0/24
-NETWORK_GATEWAY=10.0.1.1
+FIXED_RANGE=10.10.1.0/24
+NETWORK_GATEWAY=10.10.1.1
 
 ADMIN_PASSWORD=stack
 DATABASE_PASSWORD=$ADMIN_PASSWORD
@@ -52,7 +51,7 @@ VERBOSE=true
     enable_service neutron
 
     Q_PLUGIN=openvswitch
-    OVS_ENABLE_TUNNELING=talse
+    OVS_ENABLE_TUNNELING=false
 {%  endif %}
 
 {% if enable_tempest is defined and enable_tempest %}
