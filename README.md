@@ -8,7 +8,7 @@ To get started, simply have Vagrant and Ansible installed and run _vagrant up_
 from the project root directory.
 
 Local Configuration via vars/local.yml
--------------------------------------
+--------------------------------------
 
 __Enabling Programs__
 
