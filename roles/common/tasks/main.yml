@@ -1,4 +1,11 @@
 ---
+- name: configure apt
+  sudo: true
+  sudo_user: root
+  template: >
+    src=00devstacked.j2
+    dest=/etc/apt/apt.conf.d/00devstacked
+
 - name: ensure the configured user exists
   sudo: true
   sudo_user: root
