@@ -49,9 +49,6 @@ VERBOSE=true
     enable_service q-dhcp
     enable_service q-l3
     enable_service q-meta
-
-    Q_PLUGIN=openvswitch
-    OVS_ENABLE_TUNNELING=false
 {%  endif %}
 
 {% if enable_heat is defined and enable_heat %}
