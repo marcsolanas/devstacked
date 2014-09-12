@@ -4,11 +4,5 @@
 
 hosts:
   devstack:
-    memory: 2048
-    ports:
-      - guest: 80 # HTTP
-        host: 8080
-        protocol: tcp
-      - guest: 3306 # MySQL
-        host: 3306
-        protocol: tcp
+    private_ip: 192.168.57.20
+    memory: 4096

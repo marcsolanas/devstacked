@@ -22,9 +22,11 @@ Vagrant.configure('2') do |config|
                 override.vm.box_url = './packer/builds/vmware/devstacked-ubuntu-14.04.box'
             end
 
+            host.vm.network 'private_network', :ip => host_config['private_ip']
+            host.vm.host_name = "#{host_name}.local"
+
             host.vm.synced_folder './', '/vagrant', :disabled => true
             host.vm.synced_folder './repos', '/repos', :disabled => false
-            host.vm.host_name = "#{host_name}.local"
 
             if host_config['ports']
                 host_config['ports'].each do |port|

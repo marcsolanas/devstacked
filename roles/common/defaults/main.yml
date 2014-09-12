@@ -1,3 +1,7 @@
 ---
+apt_pipelinedepth: 0
+apt_nocache: false
+apt_brokenproxy: false
+
 devstack_user: vagrant
-devstack_interface: eth0
+devstack_interface: eth1
