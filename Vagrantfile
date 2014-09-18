@@ -12,18 +12,16 @@ unless File.exist?('vars/local.yml')
     FileUtils.touch('vars/local.yml')
 end
 
+# Create the repos directory if not already present
+unless File.exist?('repos')
+    FileUtils.mkpath('repos')
+end
+
 Vagrant.configure('2') do |config|
     # Create and provision each host as defined devstacked-hosts.yml
     $env['hosts'].each do |host_name, host_config|
         config.vm.define host_name do |host|
             host.vm.box = 'hashicorp/precise64'
-
-            # Packer
-            # host.vm.box = 'devstacked-ubuntu-14.04'
-            # host.vm.box_url = './packer/builds/virtualbox/devstacked-ubuntu-14.04.box'
-            # host.vm.provider 'vmware_fusion' do |v, override|
-            #     override.vm.box_url = './packer/builds/vmware/devstacked-ubuntu-14.04.box'
-            # end
 
             host.vm.network 'private_network', :ip => host_config['private_ip']
             host.vm.host_name = "#{host_name}.local"
