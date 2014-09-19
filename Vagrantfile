@@ -12,6 +12,11 @@ unless File.exist?('vars/local.yml')
     FileUtils.touch('vars/local.yml')
 end
 
+# Create the repos directory if not already present
+unless File.exist?('repos')
+    FileUtils.mkpath('repos')
+end
+
 Vagrant.configure('2') do |config|
     # Create and provision each host as defined devstacked-hosts.yml
     $env['hosts'].each do |host_name, host_config|
