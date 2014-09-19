@@ -1,5 +1,6 @@
 .vagrant/
 vars/local.yml
 repos/
+*.box
 packer/packer_cache/
 packer/builds/
