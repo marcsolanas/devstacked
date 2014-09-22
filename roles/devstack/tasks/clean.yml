@@ -19,7 +19,6 @@
 
 - name: remove an existing working directory
   sudo: true
-  sudo_user: "{{ devstack_user }}"
   command: rm -rf {{ devstack_working_dir }}
   when: working_path.stat.isdir is defined and working_path.stat.isdir == true
 
@@ -28,6 +27,5 @@
 
 - name: remove an existing install directory
   sudo: true
-  sudo_user: "{{ devstack_user }}"
   command: rm -rf {{ devstack_install_dir }}
   when: install_path.stat.isdir is defined and install_path.stat.isdir == true
