@@ -1,0 +1,19 @@
+---
+
+- name: ensuring we have the ssl directory
+  file: path=/home/{{ haproxy_user }}/ssl state=directory owner={{ haproxy_user }}
+
+- name: creating self-signed ssl key and certificate
+  sudo: true
+  command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}" -days 3650 -keyout /home/{{ haproxy_user }}/ssl/server.key -out /home/{{ haproxy_user }}/ssl/server.crt -extensions v3_ca creates=/home/{{ haproxy_user }}/ssl/server.crt
+
+- name: combining key and certificate
+  assemble: src=/home/{{ haproxy_user }}/ssl dest=/home/{{ haproxy_user }}/server.pem
+
+- name: copying PEM to correct folder
+  sudo: true
+  command: cp /home/{{ haproxy_user }}/server.pem /etc/ssl/private/server.pem
+
+- name: changing PEM permissions
+  sudo: true
+  command: chmod 644 /etc/ssl/private/server.pem

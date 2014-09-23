@@ -59,6 +59,7 @@ Vagrant.configure('2') do |config|
             # Ansible provisioning using the generated host based inventory
             host.vm.provision 'ansible' do |ansible|
                 ansible.playbook = 'devstacked-playbook.yml'
+                #ansible.verbose = 'vvvv'
             end
         end
     end

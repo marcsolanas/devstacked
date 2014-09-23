@@ -9,3 +9,10 @@
 
   roles:
     - devstack
+
+- name: haproxy tasks
+  hosts: haproxy
+  vars_files:
+    - vars/local.yml
+  roles:
+    - haproxy

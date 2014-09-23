@@ -1,0 +1,10 @@
+---
+# Ansible Handlers
+
+- name: restart haproxy
+  sudo: true
+  action: service name=haproxy state=restarted
+
+- name: restart rsyslog
+  sudo: true
+  action: service name=rsyslog state=restarted

@@ -3,8 +3,11 @@ devstack_clean: false
 devstack_offline: false
 devstack_reclone: false
 devstack_repo: https://github.com/openstack-dev/devstack.git
-devstack_version: stable/icehouse
+devstack_version: stable/havana
 devstack_working_dir: ~{{ devstack_user }}/devstack
 devstack_install_dir: /opt/stack
 
 enable_neutron: true
+
+repository_overrides:
+    - { name: "keystoneclient", repo: "https://github.com/openstack/python-keystoneclient.git", branch: "0.10.1" }

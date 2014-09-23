@@ -1,0 +1,26 @@
+---
+
+- name: ensuring the required repos are available
+  sudo: true
+  apt_repository: repo='ppa:vbernat/haproxy-1.5'
+
+- name: making sure HAproxy is in its latest version
+  sudo: true
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - haproxy
+
+- name: making sure HAproxy is enabled
+  action: service name=haproxy enabled=yes
+
+- include: ssl.yml
+
+- name: updating default configuration file
+  sudo: true
+  template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg owner={{ haproxy_user }} group={{ haproxy_user }}
+  notify: restart haproxy
+
+- name: updating default rsyslog.conf file
+  sudo: true
+  template: src=rsyslog.conf.j2 dest=/etc/rsyslog.conf owner={{ haproxy_user }} group={{ haproxy_user }}
+  notify: restart rsyslog
